@@ -1,6 +1,6 @@
 # Variables
 
-## Positional Variables
+## Positional Parameters
 
 - Write a script called **params**.
 - Use your script to print:
