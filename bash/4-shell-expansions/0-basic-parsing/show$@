@@ -1,10 +1,10 @@
 #!/bin/bash
 #
 
-printf "$@: " 
+printf "un-quoted: " 
 printf ".%s." $@
 printf "\n"
-printf ""$@": " 
+printf "quoted: " 
 printf ".%s."  "$@"
 printf "\n"
 
