@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+
+printf "$@: " 
+printf ".%s." $@
+printf "\n"
+printf ""$@": " 
+printf ".%s."  "$@"
+printf "\n"
+
