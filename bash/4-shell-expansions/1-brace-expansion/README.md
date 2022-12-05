@@ -7,11 +7,11 @@ Try the following:
 (from a to z)
 - **echo {a..z..4}**  
 (from a to z in jumps of 4 letters)
-- **echo echo {2..479}**  
+- **echo  {2..479}**  
 (from 2 to 479)
-- **echo echo {02..0479}**  
+- **echo  {02..0479}**  
 (from 2 to 479, but force each element to have the same length)
-- **echo echo {2..479..10}**  
+- **echo  {2..479..10}**  
 (from 2 to 470 in jumps of 10)
 
 ## Brace Expansion
