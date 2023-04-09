@@ -1,5 +1,7 @@
 # Getting Started
 
-Getting started with the environment I usually use through my courses.
+- Before doing anything else, make sure you have a linux installation you can use.
+- I usually use an Ubuntu (currently version 22.04) distribution.
+- The easiest way is to run Ubuntu on your current Windows or Mac machine using VirtualBox.
+- Use [this link](https://github.com/YuvalShaul/linux/blob/main/1-getting-started/infrastructure.md) to install everything.
 
-- If you don't have anything, use [this link](https://github.com/YuvalShaul/linux/blob/main/1-getting-started/infrastructure.md) to install VirtualBox, then download and use an Ubuntu image.
