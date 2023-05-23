@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+printf "please enter a word:\n"
+
+read myword
+case $myword in
+ *aaa) printf "aaa\n" ;;
+ *bbb) printf "bbb\n" ;;
+ *ccc) printf "ccc\n" ;;
+ *ddd) printf "ddd\n" ;;
+ *) printf "Not found.\n";;
+esac
+
