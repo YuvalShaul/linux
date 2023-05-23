@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# file or dir?
+
+# the next variable is a "list of words"
+allfiles=$(ls)
+echo $allfiles
+
+# Now iterate over the list of words
+for f in $allfiles
+do
+    if [ -f $f ]
+    then
+      printf "file: %s\n" $f
+    else 
+      printf "directory: %s\n" $f;
+    fi
+done

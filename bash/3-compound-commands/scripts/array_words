@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# file or dir?
+
+# the next variable is a "list of words"
+allfiles=$(ls)
+printf "List of words: "
+printf "%s " $allfiles
+printf "\n"
+# Now we create a bash array, and print entry 4, then all entries
+filesarr=($allfiles)
+printf "Entry 4 in the array: %s\n" ${filesarr[4]}
+printf "All entries in the array: "
+echo ${filesarr[*]}
+
+# Now iterate over array (we can also iterate over a list of words)
+for f in ${filesarr[*]}
+do
+    if [ -f $f ]
+    then
+      printf "file: %s\n" $f
+    else 
+      printf "directory: %s\n" $f;
+    fi
+done
