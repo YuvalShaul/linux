@@ -21,14 +21,14 @@ ls -R <dirname>   # list recursively  from <dirname> and downwards
 
 ## Viewing and editing files
 
-- vi      # short for **view**, the well known, very old local UNIX/Linux editor
+- [vi](https://en.wikipedia.org/wiki/Vi)      # short for **view**, the well known, very old local UNIX/Linux editor
+- vim
 - cat     # Write the content of the file to the standard output (screen in simple use cases)
 
 ## process commands
 
 - [ps](https://en.wikipedia.org/wiki/Ps_(Unix))      # Short for *p*rocess *s*tatus, show a list of current processes
-- kill
-
+- [kill](https://en.wikipedia.org/wiki/Vi)    # Send a signal to a process. Many signals are used to terminate a process, hence the name
 
 ## Bash commands
 
