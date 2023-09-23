@@ -55,7 +55,7 @@ ls
 ```
 pwd
 ```
-- This is amazing!!!  
+- Amazing.  
 now remove your new mount:
 ```
 cd ..
