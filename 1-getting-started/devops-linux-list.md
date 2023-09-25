@@ -58,3 +58,7 @@ This will be an ever growing list, so you may want to come back here from time t
   - Visual Studio Code
 
 ## bash 
+
+
+## linux networking
+
