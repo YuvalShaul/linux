@@ -68,4 +68,5 @@ This will be an ever growing list, so you may want to come back here from time t
 - linux networking is a mess:
   - get to know network-manager (nmcli...)
   - get to know networkd
-  - get to know 
+  - get to know netplan
+  
