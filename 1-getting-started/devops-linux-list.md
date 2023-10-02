@@ -11,11 +11,20 @@ This will be an ever growing list, so you may want to come back here from time t
 - The main idea of how an operating system works:
   - the kernel
   - processes
-    - how new processes are created ([fork system call](https://en.wikipedia.org/wiki/Fork_(system_call)))
-    - how process change themselves to run different code ([exec system call](https://en.wikipedia.org/wiki/Exec_(system_call)))
-    - process parent-[child](https://en.wikipedia.org/wiki/Child_process) relationship
-    - [process IDs](https://en.wikipedia.org/wiki/Process_identifiers)
-  - How do processes call the kernel to do things? (a.k.a  [system call](https://en.wikipedia.org/wiki/System_call))
+    - Understanding the theoretical idea behind the processes:
+      - independant memory address space for each process
+      - time sharing among processes (including explanation of using multiple cpu/core/thread)
+      - How do processes call the kernel to do things? (a.k.a  [system call](https://en.wikipedia.org/wiki/System_call))
+    - understanding process in UNIX/linux:
+      - how new processes are created ([fork system call](https://en.wikipedia.org/wiki/Fork_(system_call)))
+      - how process change themselves to run different code ([exec system call](https://en.wikipedia.org/wiki/Exec_(system_call)))
+      - process parent-[child](https://en.wikipedia.org/wiki/Child_process) relationship
+      - [process IDs](https://en.wikipedia.org/wiki/Process_identifiers)
+    - do things with processes in linux
+      - list process (and list all processes) using the [ps](https://en.wikipedia.org/wiki/Ps_(Unix)) command
+      - send signals to processes (and sometimes kill them) with the [kill](https://en.wikipedia.org/wiki/Kill_(command)) command
+      - use the shell to run [processes in the background](https://en.wikipedia.org/wiki/Background_process) with the **&** control operator
+
 
 
 ## Directories and Files
@@ -41,15 +50,11 @@ This will be an ever growing list, so you may want to come back here from time t
 ## Processes and programs
 
 - Understanding the idea of an executable file (compiling basic C program to an executable)
-- Understanding dynamic libraries (so files) how programs depend on them
-- Understanding processes as running programs:
-  - list processes (current processes and all processes)
-  - understand process IDs
-  - how processes are born (fork and exec system calls)
-- Understanding the theoretical idea behind the processes:
-  - independant memory address space for each process
-  - time sharing among processes (including explanation of using multiple cpu/core/thread)
-  - REDO: how a process interracts with OS to do things (system-calls revisited)
+  - hear about the [elf fotmat](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format)
+  - see executable files with the [type](https://en.wikipedia.org/wiki/Type_(Unix)) command
+- Understanding [dynamic libraries (so files)](https://en.wikipedia.org/wiki/Shared_library) how programs depend on them
+  - using the [ldd](https://en.wikipedia.org/wiki/Ldd_(Unix)) command
+  - understanding the [C runtime library](https://en.wikipedia.org/wiki/Runtime_library) as an OS component
 
 ## Linux Editors
 
@@ -57,11 +62,18 @@ This will be an ever growing list, so you may want to come back here from time t
   - vi (and is successor vim) is the basic
     - why vi is so important
     - move freely from command mode to edit mode (pen-down, pen-up)
+      - ESC for **pen-up**
+      - i, a, o, O,  to pen down in different locations 
     - save, quit-and-save
-    - discard changes so you can quit
+      - w to write (save)
+      - q to quit or q! to force quit (and discard changes)
+      - wq to write-and-quit
     - delete characters and lines
-    - copy and paste
+      - **x** (in pen-up) to delete characters
+      - **<num> dd** (in pen-up) to delete line(s)
+    - copy and paste ( yy or Y ("yank") and either p ("put below") or P ("put above"))
     - go to places (line numbers, end-of-file etc.)
+    - **/** to search, **n** for next **N** for previous
   - nano
     - ??
 - graphical editors:
