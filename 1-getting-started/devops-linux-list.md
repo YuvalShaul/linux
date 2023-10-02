@@ -11,6 +11,11 @@ This will be an ever growing list, so you may want to come back here from time t
 - The main idea of how an operating system works:
   - the kernel
   - processes
+    - How do processes call the kernel to do things? (a.k.a  [system call](https://en.wikipedia.org/wiki/System_call))
+    - how new processes are created ([fork system call](https://en.wikipedia.org/wiki/Fork_(system_call)))
+    - how process change themselves to run different code ([exec system call](https://en.wikipedia.org/wiki/Exec_(system_call)))
+    - process parent-[child](https://en.wikipedia.org/wiki/Child_process) relationship
+    - [process IDs](https://en.wikipedia.org/wiki/Process_identifiers)
   - system calls
 
 ## Directories and Files
