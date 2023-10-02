@@ -62,9 +62,17 @@ This will be an ever growing list, so you may want to come back here from time t
 
 ## linux networking
 
-- Basics of showing info
-  - ifconfig (..which is obsolete, but you should know it)
-  - ip commands (ip addr show, ip link ...)
+- Legacy networking commands:
+  - ifconfig
+  - route
+  - arp
+  - iptunnel
+  - netstat
+  - brctl
+- iproute2 commands
+  - ip addr, ip link
+  - ip neigh
+  
 - linux networking is a mess:
   - get to know network-manager (nmcli...)
   - get to know networkd
