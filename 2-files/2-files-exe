@@ -1,0 +1,17 @@
+A. Files
+
+A-1  Create a file called "dont", and change something so that you cannot  delete it by running:
+        rm dont
+     Now, change back and delete the file
+
+A-2  Create a directory called "mylog" and mount "/var/log" in it.
+     undo
+
+A-3  Copy ls into your home directory, and rename to "myls"
+     Create a hard link to it called hardls (and demonstrate using it)
+     remove myls, then try to use the hard link
+     -------------------------------------------
+
+A-4  Copy ls into your home directory, and rename to "myls"
+     create a soft link to it called softls  (demonstrate using it)
+     remove myls, then try to use the soft link
