@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+echo "positional 1 " $1 
+echo "positional 2 " $2 
+echo "positional 3 " $3 
+echo "positional 4 " $4 
+echo "positional 5 " $5 
+echo "positional 6 " $6 
+echo "positional 7 " $7 
+echo "positional 8 " $8 
+echo "positional 9 " $9 
+echo "positional 10 " ${10} 
