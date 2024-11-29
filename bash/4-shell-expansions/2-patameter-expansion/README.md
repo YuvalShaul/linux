@@ -19,7 +19,7 @@ Make sure that the **shpar** program is available from all directories.
 
 Try this:  
 - Basic parameter expansion:  
-**myvar=abc123**
+**myvar=abc123**  
 **shpar "$myvar"**
 - With braces (not needed here):  
 **shpar "${myvar}"**
