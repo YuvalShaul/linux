@@ -67,9 +67,10 @@ sudo mkfs.vfat -F 32 /dev/sdb1
 ```
 mkdir diskB
 ```
-- Use the **mount** command to mount your new disk:
+- Use the **mount** command to mount your new disk:  
+(you specify ownership during mount)
 ```
-sudo mkfs.vfat -F 32 /dev/sdb1
+sudo mount -o uid=1000,gid=1000 /dev/sdb1  diskB/
 ```
 - You can now copy files and use the new device.
 - If you want to get a "feeling" of that device, you can umount it (un mount), then mount it some other place.
