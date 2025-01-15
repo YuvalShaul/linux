@@ -6,10 +6,11 @@ Then we will mount it in our own prefered directory location.
 
 ## Creating another disk
 
+
 - This lab assume you are using VmWare Workstation.
 - Stop your linux (shut dowm)
 - Click on settings, than click on the **Add** button:  
-![Add a device]("./add.jpg")
+![Add a device](images/add.jpg)
 
 ## Showing mounts
 
