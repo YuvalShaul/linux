@@ -1,4 +1,10 @@
-Here are 20 bash scripting exercises focused on loops, functions, parameters, and file operations:
+### Bash Exercises'
+- Bash scripting exercises
+- focused on:
+  - loops
+  - functions
+  - parameters
+  - file operations
 
 1. Create a script that accepts a directory path as parameter and counts how many files have a ".txt" extension in that directory and all subdirectories.
 
