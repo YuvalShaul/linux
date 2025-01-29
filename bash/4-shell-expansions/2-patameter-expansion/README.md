@@ -78,5 +78,17 @@ myvar=hello
 echo "${myvar:+alternate}"
 ```
 
+## Strings
 
+${parameter:offset}
+${parameter:offset:length}
+Examples:
+```
+$ str1=abcdefghijklmnopqrstuvwxyz
+$ echo ${str1:10}
+klmnopqrstuvwxyz
+$ echo ${str1:10:4}
+klmn
+$ 
+```
 
