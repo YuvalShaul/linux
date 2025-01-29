@@ -1,0 +1,17 @@
+#!/bin/bash
+
+hello() {
+    local myname=$1
+    printf "hello %s\n" $myname
+}
+
+
+goodbye() {
+  #  myname=$1
+  printf "Goodbye %s\n" $myname
+}
+
+do_bad(){
+  printf "I do bad.\n"
+  return 1
+}
