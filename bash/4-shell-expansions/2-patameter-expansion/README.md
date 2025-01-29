@@ -89,6 +89,11 @@ $ echo ${str1:10}
 klmnopqrstuvwxyz
 $ echo ${str1:10:4}
 klmn
+```
+You can also show the length of a string:
+```
+$ echo ${#str1}
+26
 $ 
 ```
 
