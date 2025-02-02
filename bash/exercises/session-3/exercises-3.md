@@ -6,6 +6,7 @@
   - parameters
   - file operations
 
+
 1. Create a script that accepts a directory path as parameter and counts how many files have a ".txt" extension in that directory and all subdirectories.
 
 2. Write a script that takes multiple file names as parameters and renames them by adding the current date as prefix.
