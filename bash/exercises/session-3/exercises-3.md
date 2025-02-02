@@ -5,7 +5,7 @@
   - functions
   - parameters
   - file operations
-
+(add this line for testing)
 
 1. Create a script that accepts a directory path as parameter and counts how many files have a ".txt" extension in that directory and all subdirectories.
 
