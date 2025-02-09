@@ -13,22 +13,22 @@ Create a main menu function
 
 Create a function to:
 
-Display CPU usage using top command
-Show memory usage using free command
-Display disk usage using df command
-Show system uptime
-Display recent system logs
+Display CPU usage using top command  
+Show memory usage using free command  
+Display disk usage using df command  
+Show system uptime  
+Display recent system logs  
 
 
 
 #### User Management
 
-Implement functions for:
+Implement functions for:  
 
-Listing all system users
-Adding new users
-Deleting users
-Modifying user properties
+Listing all system users  
+Adding new users  
+Deleting users  
+Modifying user properties  
 
 
 Include proper error handling
