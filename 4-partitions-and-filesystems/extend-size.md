@@ -69,3 +69,36 @@ yuval@yuval-VMware-Virtual-Platform:~$
 ```
 
 #### Fixing the file-system
+
+- Note that now the partition "sees" 100GB
+- File system still occupies only 20GB from this space:
+```
+$ df -h  /dev/nvme0n1p2 
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p2   20G  5.8G   13G  32% /
+$ 
+```
+- Another way to see that using the **lsblk** command:
+```
+$ lsblk -f /dev/nvme0n1p2 
+NAME      FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+nvme0n1p2 ext4   1.0         5deec172-ca3f-479c-bb82-df663332b3e4   12.8G    29% /
+$ 
+```
+- So I am using 5.8GB out of a total of 20GB, so my ext4 file system does not "see" the complete size.
+- The command for ext4 is **resize2fs**
+```
+$ sudo resize2fs /dev/nvme0n1p2
+resize2fs 1.47.0 (5-Feb-2023)
+Filesystem at /dev/nvme0n1p2 is mounted on /; on-line resizing required
+old_desc_blocks = 3, new_desc_blocks = 13
+The filesystem on /dev/nvme0n1p2 is now 26213883 (4k) blocks long.
+```
+- And now:
+```
+$ lsblk -f /dev/nvme0n1p2 
+NAME      FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+nvme0n1p2 ext4   1.0         5deec172-ca3f-479c-bb82-df663332b3e4   88.3G     6% /
+$ 
+```
+Which completes the process.
