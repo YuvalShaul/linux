@@ -5,9 +5,67 @@ In this lab, well:
 - configure the filesystem inside to fit the new size.
 
 ### Extending the disk
-- My virtual machine has a ![disk size of 20GB](./material/storage-20G.jpg).  
+- My virtual machine has a 20 GB disk.  
+![disk size of 20GB](./material/storage-20G.jpg).  
 - I am using the VmWare Workstation Pro setting to resize this to 100GB.
+  - First - shut down the image
   - The **Expand** button will open a sub window
   - The sub window uses the term **Maximum disk size** which means that this is the physical size, and it is the maximum that partitions can use.
   - ![see example](./material/storage-expand-to-100G.jpg)
 
+### Partitioning
+#### Looking at my partitioning scheme
+- First, let's look at my partitions
+- This is how it looks:
+```
+yuval@yuval-VMware-Virtual-Platform:~$ sudo fdisk -l /dev/nvme0n1 
+GPT PMBR size mismatch (41943039 != 209715199) will be corrected by write.
+Disk /dev/nvme0n1: 100 GiB, 107374182400 bytes, 209715200 sectors
+Disk model: VMware Virtual NVMe Disk
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 3497DCCF-0853-4101-9A77-784C6A709481
+
+Device         Start      End  Sectors Size Type
+/dev/nvme0n1p1  2048     4095     2048   1M BIOS boot
+/dev/nvme0n1p2  4096 41940991 41936896  20G Linux filesystem
+yuval@yuval-VMware-Virtual-Platform:~$ 
+```
+
+In my case, this is telling me:
+- Physical disk size is 100GB
+- I am using GPT (not MBR) partitioning scheme
+- Block size is 512 bytes
+- Partition /dev/nvme0n1p1 is 1M (this one actually contains GRUB)
+- The main partition is just 20GB
+
+#### Expanding my partition
+
+- Technically, a partition must have contiguous free space immediately following it to be expanded easily.
+- In my case, /dev/nvme0n1p2 is the last partition on the disk, so there is nothing "blocking" it from growing into that 80GB of empty space.
+- While fdisk can do this, it requires deleting and recreating the partition entry (which is nerve-wracking). 
+- The most reliable, "standard" way to handle this on modern Linux systems—especially in cloud and virtual environments—is using **growpart**:
+```
+@yuval-VMware-Virtual-Platform:~$ sudo growpart /dev/nvme0n1 2 
+[sudo] password for yuval: 
+CHANGED: partition=2 start=4096 old: size=41936896 end=41940991 new: size=209711071 end=209715166
+yuval@yuval-VMware-Virtual-Platform:~$ 
+yuval@yuval-VMware-Virtual-Platform:~$ 
+yuval@yuval-VMware-Virtual-Platform:~$ sudo fdisk -l /dev/nvme0n1 
+Disk /dev/nvme0n1: 100 GiB, 107374182400 bytes, 209715200 sectors
+Disk model: VMware Virtual NVMe Disk
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 3497DCCF-0853-4101-9A77-784C6A709481
+
+Device         Start       End   Sectors  Size Type
+/dev/nvme0n1p1  2048      4095      2048    1M BIOS boot
+/dev/nvme0n1p2  4096 209715166 209711071  100G Linux filesystem
+yuval@yuval-VMware-Virtual-Platform:~$ 
+```
+
+#### Fixing the file-system
