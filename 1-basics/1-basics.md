@@ -4,6 +4,11 @@
 - If this is a GUI version, search and run a terminal
 
 #### Commands:
+- **clear** to clear the screen
+- **whoami** to find the current logged in user
+- **uptime** Tells you how long the computer has been running without a reboot.
+- **pwd** (print working directory) to find out current dir
+- **cd <dir name>** (change directory) to change to a new directory
 - **type** to find out the type of a command
 - **ls** to list files
 - **ls -l** for long listing
