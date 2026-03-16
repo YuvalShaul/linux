@@ -15,6 +15,7 @@
       [Ubuntu 24.04.4 LTS (Noble Numbat)](https://ubuntu.com/download/desktop)
 - This version is:
   - A desktop version (so it has GUI)
+  - Has X86-64 (also called amd64), but also ARM version (for Mac users)
   - stable
   - Long Term support by Canonical (support until June 2029)
   - Formal requirements: CPU: dual-core 2GHz, 4Gb-Memory, 25Gn storage, usb/DVD drive for installation
