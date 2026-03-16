@@ -1,33 +1,42 @@
+#### Infrastructure
 
+- Run your copy of linux.
+- If this is a GUI version, search and run a terminal
 
+#### Commands:
+- **type** to find out the type of a command
+- **ls** to list files
+- **ls -l** for long listing
+- **ls <dir>** to list files in a directory
+- **ls -d <dir>** to list the directory entry itself
+- **echo <string or variable>** to show something on the terminal
+- For globbing (also called wildcards):
+  - '*' stands for 0 or more (ant) characters
+  - '?' stands for a exactly one character
+  - [] stands for exatly one character in the brackets.
+    - [a-e] stands for a single letter in the range a-e
+    - [a-e79,] stands for a single letter in range a-e and also '7', '9', and comma ','
+- **cat <file name>** displays the content of a file
+- **touch** update creation time of a file, or create it if it is not there
 
-A.  Infrastructure
----------------------
+#### Try out commands
 
-A-1  Make sure you can run linux in VirtualBox.
-     You can refer to this link:
-        http://localhost:1313/linux/basics/running-from-virtualbox/
-
-
-B. Try out commands
----------------------
-
-B-1 list all files in the root directory
+1 list all files in the root directory
     Which one is the largest file?
-B-2 Inspect the "echo" command.
+2 Inspect the "echo" command.
     What type command is it?
-B-3 Find a file which is not a directory in /lib directory, and find the file type.
+3 Find a file which is not a directory in /lib directory, and find the file type.
 
-B-4 List all the files with name ending with "log" in the /var/log directory
+4 List all the files with name ending with "log" in the /var/log directory
 
-B-5 Display the content of /var/log/dpkg.log
+5 Display the content of /var/log/dpkg.log
 
-B-6 Create a "try" directory under your home directory.
+6 Create a "try" directory under your home directory.
     Inside, create a file called "file1.f.g"
     Rename this file to "file1.g.f"
     Now, rename it to myfile, and move it into your home directory (one command)
 
-B-7  Copy the "ls" command to your home directory.
+7  Copy the "ls" command to your home directory.
      Rename it to "good-ls"
      Run your new command
 
