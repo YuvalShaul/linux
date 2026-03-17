@@ -25,3 +25,9 @@
   
 4 - **automate first..**
   - Use tools in preference to unskilled help to lighten a programming task, even if you have to detour to build the tools and expect to throw some of them out after you've finished using them.
+
+#### My Own tips
+
+- Learn to use the [CLI (command line interpreter)](https://en.wikipedia.org/wiki/Command-line_interface)
+  - Created when [Terminals](https://en.wikipedia.org/wiki/Computer_terminal) were used
+- Learn to use the [vi text editor](https://en.wikipedia.org/wiki/Vi_(text_editor)) 
