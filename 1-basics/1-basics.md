@@ -23,13 +23,17 @@
     - [a-e79,] stands for a single letter in range a-e and also '7', '9', and comma ','
 - **cat <file name>** displays the content of a file
 - **touch** update creation time of a file, or create it if it is not there
+- **cp** to copy a file
+- **mv** to move or rename a file
 
 #### Try out commands
 
 1 list all files in the root directory
     Which one is the largest file?
+
 2 Inspect the "echo" command.
     What type command is it?
+
 3 Find a file which is not a directory in /lib directory, and find the file type.
 
 4 List all the files with name ending with "log" in the /var/log directory
