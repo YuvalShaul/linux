@@ -12,7 +12,8 @@
 #### Ubuntu version and requirements
 
 - We'll use:  
-      [Ubuntu 24.04.4 LTS (Noble Numbat)](https://ubuntu.com/download/desktop)
+      X86-64(AMD):  [Ubuntu 24.04.4 LTS (Noble Numbat)](https://ubuntu.com/download/desktop)
+      ARM: [Ubuntu 24.04.4 (Noble Numbat)](https://cdimage.ubuntu.com/releases/noble/release/)
 - This version is:
   - A desktop version (so it has GUI)
   - Has X86-64 (also called amd64), but also ARM version (for Mac users)
