@@ -15,16 +15,25 @@ and now 3 represents this file.
 
 #### Redirections
 
-- You can redirect input
+- You can **redirect input**
 - Choose a program that reads from the standard input, like **grep**:
 ```
 grep bla < myfile.txt
 ```
-- Redirect output.
+- **Redirect output**:
 - Choose a program that write to stdout:
 ```
 ls / > files
 ```
-
+- **Append**:
+```
+echo "this is line 1" > file1
+echo "this is line 2" >> file1
+```
+- Merge streams:
+```
+ls -R /  > allout 2>&1
+```
+(redirect STDERR to the same place you sent STDOUT)
 
 #### pipelines
