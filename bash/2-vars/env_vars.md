@@ -11,8 +11,8 @@
 
 - **env** or **printenv** — list only the variables that are exported (i.e. the actual environment)
 - **printenv VARNAME** — print one specific environment variable
-- **set** — list *everything* visible to the shell: exported variables, plain shell variables, and shell functions
 - **echo $VARNAME** — print the value of any variable (shell or environment) by name
+- Note: **set** also shows exported variables, but mixed in with plain shell variables and functions — it's not filtered to just the environment. See [shell_vars.md](shell_vars.md) for details.
 
 ## Where are they stored?
 

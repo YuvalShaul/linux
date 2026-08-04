@@ -52,3 +52,33 @@
   echo $last
   # shaul
   ```
+
+## How do you see them?
+
+- **set** with no arguments lists *every* variable currently visible to the shell — plain shell variables, exported environment variables, and shell functions, all together.
+
+  ```bash
+  set
+  # BASH=/bin/bash
+  # myname=yuval
+  # PATH=/usr/bin:/bin
+  # ...
+  ```
+
+- This is broader than **env** or **printenv**, which only show variables that have been exported to the environment (see [env_vars.md](env_vars.md)). A brand-new, unexported variable like `myname=yuval` shows up in `set` but not in `env`.
+- To check a single variable instead of scrolling through everything, filter it out with **grep**, or just `echo $name`:
+
+  ```bash
+  set | grep myname
+  # myname=yuval
+  ```
+
+- To list only the shell variables that are **not** exported, compare the two lists directly with `compgen` and `comm`:
+
+  ```bash
+  comm -23 <(compgen -v | sort) <(compgen -e | sort)
+  ```
+
+  - `compgen -v` — names of **all** shell variables
+  - `compgen -e` — names of **exported** variables only (the same set `env` shows)
+  - `comm -23` — print lines that appear only in the first list, i.e. the ones that aren't exported
