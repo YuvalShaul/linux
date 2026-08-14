@@ -84,6 +84,40 @@ After editing a netplan file, apply it with `sudo netplan apply`.
 **Why this matters:** on Ubuntu Server, `nmcli` may be installed and NetworkManager may even be running — but if netplan renders to networkd, your interface is `unmanaged` from NetworkManager's point of view, and `nmcli` changes will go nowhere.
 
 
+### Ownership is per-device, not per-system
+So far it may sound like a machine picks one manager and that's that. In reality, the rule is finer-grained: **every interface has exactly one owner, but different interfaces can have different owners.** Both NetworkManager and systemd-networkd can be active on the same system at the same time — that is a normal, supported setup, not a misconfiguration — as long as each interface is claimed by only one of them.
+
+A common real-world example: an Ubuntu server where netplan renders `ens33` to systemd-networkd, while NetworkManager is also running and manages a Wi-Fi USB dongle that networkd knows nothing about. Ask each manager and you'll see complementary answers:
+```
+$ networkctl list
+IDX LINK   TYPE     OPERATIONAL SETUP
+  2 ens33  ether    routable    configured    ← networkd owns this one
+  3 wlan0  wlan     routable    unmanaged     ← ...but not this one
+
+$ nmcli device status
+DEVICE  TYPE      STATE       CONNECTION
+wlan0   wifi      connected   office-wifi    ← NetworkManager owns this one
+ens33   ethernet  unmanaged   --             ← ...and politely stays off this one
+```
+Each manager marks the other's interface `unmanaged`. Trouble only starts if **both** claim the *same* interface — then they fight over its configuration (each reapplying its own addresses), and the symptoms look like random network flapping.
+
+On Ubuntu, netplan can even do the splitting for you: `renderer:` is not only a global setting — it can be set per interface, sending some devices to networkd and others to NetworkManager:
+```
+network:
+  version: 2
+  renderer: networkd          # default for everything...
+  ethernets:
+    ens33:
+      dhcp4: true             # → rendered to systemd-networkd
+  wifis:
+    wlan0:
+      renderer: NetworkManager   # → this one handed to NetworkManager
+      access-points:
+        office-wifi:
+          password: "s3cret"
+```
+This is why the checklist below asks each manager about *your specific interface*, rather than just asking which services are running.
+
 ### So who runs MY system? A checklist
 Run these and compare with the table below.
 
