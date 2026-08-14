@@ -1,6 +1,6 @@
 # NFS lab: sharing a filesystem between two Ubuntu VMs
 
-**Prerequisite:** [0-linux-networking-basics.md](0-linux-networking-basics.md) and [1-nm-config.md](1-nm-config.md) — you should be comfortable finding your interface, IP address and subnet, and know how your VMs get their addresses.
+**Prerequisite:** [0-linux-networking-basics.md](0-linux-networking-basics.md), [1-nm-config.md](1-nm-config.md) and [2-linux-firewall.md](2-linux-firewall.md) — you should be comfortable finding your interface, IP address and subnet, know how your VMs get their addresses, and know the basics of UFW.
 
 ## What is NFS?
 
