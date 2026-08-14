@@ -33,6 +33,8 @@ Note two things from the `nmcli` output:
 - The **device** name (`ens33`) — the actual interface.
 - The **connection** name (`Wired connection 1`) — NetworkManager's configuration *profile* attached to that device. `nmcli` commands modify the *connection*, not the device directly.
 
+(`lo` showing `unmanaged` is normal — the kernel configures the loopback interface by itself, so NetworkManager leaves it alone. It is not an error.)
+
 
 ### Step 0b: Finding sensible addresses (hint: look at the default route)
 Before assigning a static IP you must know:
@@ -73,7 +75,7 @@ $ nmcli device status
 DEVICE  TYPE      STATE      CONNECTION
 ens33   ethernet  connected  Wired connection 1
 ```
-`connected` with a connection name means NetworkManager owns the interface — you are good to go.
+`connected` with a connection name means NetworkManager owns the interface — you are good to go. Take note of the connection name in *your* output: on netplan-rendered systems (Ubuntu desktop included) it will be `netplan-<device>` (e.g. `netplan-ens33`) rather than `Wired connection 1`.
 
 If instead it shows `unmanaged`, go back to the checklist in [0-linux-networking-basics.md](0-linux-networking-basics.md) to find out who really manages it (on Ubuntu, most likely you need to set `renderer: NetworkManager` in `/etc/netplan/*.yaml` and run `sudo netplan apply`).
 
@@ -81,7 +83,7 @@ If instead it shows `unmanaged`, go back to the checklist in [0-linux-networking
 ### Step 2: Configure a permanent static IP with nmcli
 The key idea: `nmcli connection modify` writes to the connection's **configuration file on disk**, so the change is *permanent by definition*. It does **not** change the running state — that happens when the connection is (re)activated.
 
-Using the values we discovered in Step 0 (adjust to *your* subnet!):
+Using the values we discovered in Step 0 (adjust to *your* subnet, and use *your* connection name from `nmcli device status` — e.g. `netplan-ens33` instead of `Wired connection 1`):
 ```
 $ sudo nmcli connection modify "Wired connection 1" \
     ipv4.method manual \
@@ -120,7 +122,15 @@ $ ping -c 2 8.8.8.8            # can we reach the internet?
 $ ping -c 2 google.com         # does DNS resolution work?
 ```
 
-**Where did the configuration go?** Look at the file NetworkManager wrote:
+**Where did the configuration go?** The profile was written to a file on disk — but *where* depends on the distro. Don't guess; ask NetworkManager. The **FILENAME** field shows the file that actually backs each profile:
+```
+$ nmcli -f NAME,FILENAME connection show
+NAME                FILENAME
+Wired connection 1  /etc/NetworkManager/system-connections/Wired connection 1.nmconnection
+```
+Now branch on what *you* see:
+
+**Case A — FILENAME is under `/etc/NetworkManager/system-connections/`** (Debian, RHEL, Fedora — upstream-style NetworkManager). That file *is* the permanent configuration. Look inside it and find your settings in the `[ipv4]` section:
 ```
 $ sudo cat /etc/NetworkManager/system-connections/Wired\ connection\ 1.nmconnection
 ...
@@ -130,11 +140,30 @@ dns=192.168.111.2;8.8.8.8;
 method=manual
 ```
 
+**Case B — FILENAME is under `/run/NetworkManager/system-connections/`** and you are on Ubuntu (22.10 or newer, including 24.04). Ubuntu patches NetworkManager to save profiles through **netplan**, so the permanent file is Netplan YAML instead:
+```
+$ nmcli -f NAME,FILENAME connection show
+NAME           FILENAME
+netplan-ens33  /run/NetworkManager/system-connections/netplan-ens33.nmconnection
+
+$ sudo cat /etc/netplan/90-NM-*.yaml
+network:
+  version: 2
+  ethernets:
+    NM-<uuid>:
+      match:
+        name: "ens33"
+      addresses:
+      - "192.168.111.50/24"
+      ...
+```
+Find your static address in the YAML — that is where `nmcli connection modify` really saved it. The keyfile under `/run` is **regenerated from this YAML on every boot**, so "in `/run`" does *not* mean "lost on reboot" here — the source of truth simply moved up to the netplan layer. This is also why `/etc/NetworkManager/system-connections/` is empty on these systems even though the configuration is fully permanent.
+
 **Prove it survives a restart:**
 ```
 $ sudo reboot
 ```
-After the machine comes back, log in and run `ip addr show ens33` again — you should still have `192.168.111.50`.
+After the machine comes back, log in and run `ip addr show ens33` again — you should still have `192.168.111.50`. Whichever file your FILENAME pointed to, this reboot is the proof that it really is the persistent one.
 
 
 ### Step 3: Configure automatic IP (back to DHCP)
