@@ -23,7 +23,35 @@ DEVICE  TYPE      STATE      CONNECTION
 ens33   ethernet  connected  Wired connection 1
 lo      loopback  unmanaged  --
 ```
-A key concept: NetworkManager separates the **device** (`ens33`, the actual interface) from the **connection** (`Wired connection 1`, a configuration profile). Commands modify the *connection*; the device just runs whatever profile is active on it.
+#### Key concept: device vs. connection
+NetworkManager separates two ideas:
+- A **device** is the actual network interface the kernel sees (`ens33`, `wlan0`). It is the *hardware side*.
+- A **connection** is a saved *configuration profile* — a recipe for how to set up a device. It is stored as a file on disk, and exists even when it is not in use.
+
+Is a connection "layer 3"? No — it is not tied to one OSI layer. A connection profile bundles settings from several layers:
+- **Layer 2 settings:** Wi-Fi SSID and password, MAC address cloning, MTU, VLAN tags
+- **Layer 3 settings:** IPv4/IPv6 method (DHCP or static), addresses, gateway, DNS
+
+Think of it as "everything needed to bring this device into a usable state", not as a network layer.
+
+**Can there be multiple connections for a single device?** Yes — many can *exist*, but only one can be *active* on the device at a time. The classic example is a laptop's Wi-Fi: one device, one profile per network you have ever joined:
+```
+$ nmcli connection show
+NAME            UUID                                  TYPE      DEVICE
+home-wifi       f2a6f052-31c8-46f2-8bc3-b0a3a4d1e0cd  wifi      wlan0
+office-wifi     8f0f6a2e-6f0e-4b0a-9d3e-2f6a1c9b7d21  wifi      --
+cafe-wifi       1d9b8c3a-4e5f-6a7b-8c9d-0e1f2a3b4c5d  wifi      --
+```
+The `DEVICE` column shows which profile is *currently active* — here `home-wifi` runs on `wlan0`, while the other two are saved but inactive. Each profile carries its own L2 settings (a different SSID and password) **and** its own L3 settings (perhaps DHCP at home, but a static address at the office).
+
+The same trick works for wired interfaces. You could keep two profiles for `ens33` — say `lab-static` and `lab-dhcp` — and switch the whole configuration with one command:
+```
+$ sudo nmcli connection up lab-static     # ens33 now has the static setup
+$ sudo nmcli connection up lab-dhcp       # same device, back to DHCP
+```
+Activating one profile on a device automatically deactivates the previous one.
+
+Bottom line: `nmcli` commands modify the **connection** (the file on disk); the device just runs whichever profile is active on it.
 
 ### Player 2: systemd-networkd
 - **Where you'll find it:** Ubuntu **Server**, minimal and cloud images.
