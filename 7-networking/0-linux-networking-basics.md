@@ -77,6 +77,8 @@ network:
 - `renderer: NetworkManager` → NetworkManager manages everything (Ubuntu **Desktop** default).
 - `renderer: networkd` — or no renderer line at all → systemd-networkd manages everything (Ubuntu **Server** default).
 
+![netplan reads /etc/netplan/*.yaml and generates backend config for systemd-networkd or NetworkManager, which talk to the kernel](netplan.png)
+
 After editing a netplan file, apply it with `sudo netplan apply`.
 
 **Why this matters:** on Ubuntu Server, `nmcli` may be installed and NetworkManager may even be running — but if netplan renders to networkd, your interface is `unmanaged` from NetworkManager's point of view, and `nmcli` changes will go nowhere.
